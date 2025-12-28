@@ -52,8 +52,8 @@
             <li class="sidebar-menu-group-title">Application</li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
-                    <span>Email</span>
+                    <iconify-icon icon="material-symbols-light:order-approve-rounded" class="menu-icon"></iconify-icon>
+                    <span>Orders Mananagement</span>
                 </a>
             </li>
             <li>
@@ -96,7 +96,7 @@
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)">
-                    <i class="ri-robot-2-line text-xl me-6 d-flex w-auto"></i>
+                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Ai Application</span>
                 </a>
                 <ul class="sidebar-submenu">
