@@ -5,31 +5,36 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $role = mysqli_real_escape_string($conn, $_POST['role']); 
-    $address = mysqli_real_escape_string($conn, $_POST['address']); 
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-   
+    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
+    $email     = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone     = mysqli_real_escape_string($conn, $_POST['phone']);
+    $role      = mysqli_real_escape_string($conn, $_POST['role']); 
+    $address   = mysqli_real_escape_string($conn, $_POST['address']); 
+    $password  = mysqli_real_escape_string($conn, $_POST['password']);
+
+
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-    $image_path = "";
+    $image_path = "assets/images/user-dummy.png"; 
+    
     if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] == 0) {
         $target_dir = "assets/images/users/";
-        if (!file_exists($target_dir)) { mkdir($target_dir, 0777, true); }
-        
-        $target_file = $target_dir . basename($_FILES["user_image"]["name"]);
-        move_uploaded_file($_FILES["user_image"]["tmp_name"], $target_file);
-        $image_path = $target_file; 
 
+        if (!file_exists($target_dir)) { mkdir($target_dir, 0777, true); }
+
+        $file_extension = pathinfo($_FILES["user_image"]["name"], PATHINFO_EXTENSION);
+        $new_filename = uniqid() . '.' . $file_extension;
+        $target_file = $target_dir . $new_filename;
+        
+        if(move_uploaded_file($_FILES["user_image"]["tmp_name"], $target_file)) {
+            $image_path = $target_file; 
+        }
     }
 
-
-    $sql = "INSERT INTO `users`(`full_name`, `email`, `password_hash`, `phone`, `address`, `role`) 
-            VALUES ('$full_name', '$email', '$password_hash', '$phone', '$address', '$role')";
+    $sql = "INSERT INTO `users`(`full_name`, `email`, `password_hash`, `phone`, `address`, `role`, `image_url`) 
+            VALUES ('$full_name', '$email', '$password_hash', '$phone', '$address', '$role', '$image_path')";
 
     if ($conn->query($sql) === TRUE) {
         $message = '<div class="alert alert-success">User created successfully!</div>';
@@ -100,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-20">
                                     <label for="name" class="form-label fw-semibold text-primary-light text-sm mb-8">Full Name <span class="text-danger-600">*</span></label>
                                     <input type="text" name="full_name" class="form-control radius-8" id="name" placeholder="Enter Full Name" required>
@@ -135,9 +141,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
 
                                 <div class="d-flex align-items-center justify-content-center gap-3">
-                                    <button type="button" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">
+                                    <a href="users-list.php" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8 text-decoration-none">
                                         Cancel
-                                    </button>
+                                    </a>
                                     <button type="submit" class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">
                                         Save User
                                     </button>
