@@ -50,6 +50,116 @@
                 </ul>
             </li>
             <li class="sidebar-menu-group-title">Application</li>
+             <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                    <span>User Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="users-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Users List</a>
+                    </li>
+                    <li>
+                        <a href="add-user.php"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a>
+                    </li>
+                    <li>
+                        <a href="view-profile.php"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
+                    </li>
+                </ul>
+            </li>
+
+             <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <span>Category Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="category_list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Category List</a>
+                    </li>
+                    <li>
+                        <a href="add_category.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Category</a>
+                    </li>
+                    
+                   
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <span>Medicine Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="#"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Medicine List</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Medicine</a>
+                    </li>
+                    
+                   
+                </ul>
+            </li>
+
+             <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <span>Supplier Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Supplier List</a>
+                    </li>
+                    <li>
+                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Supplier</a>
+                    </li>
+                    
+                   
+                </ul>
+            </li>
+
+             <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <span>Purchase Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Purchase List</a>
+                    </li>
+                    <li>
+                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Purchase</a>
+                    </li>
+                    
+                   
+                </ul>
+            </li>
+
+
+              <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="material-symbols-light:order-approve-rounded" class="menu-icon"></iconify-icon>
+                    <span>Order Management</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Order List</a>
+                    </li>
+                    <li>
+                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Order</a>
+                    </li>
+                    
+                   
+                </ul>
+            </li>
+
+
+
+
+
+
+
+
             <li>
                 <a href="email.php">
                     <iconify-icon icon="material-symbols-light:order-approve-rounded" class="menu-icon"></iconify-icon>
@@ -269,23 +379,7 @@
                     <span>Widgets</span>
                 </a>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)">
-                    <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
-                    <span>Users</span>
-                </a>
-                <ul class="sidebar-submenu">
-                    <li>
-                        <a href="users-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Users List</a>
-                    </li>
-                    <li>
-                        <a href="add-user.php"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a>
-                    </li>
-                    <li>
-                        <a href="view-profile.php"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
-                    </li>
-                </ul>
-            </li>
+           
 
             <li class="dropdown">
                 <a href="javascript:void(0)">
