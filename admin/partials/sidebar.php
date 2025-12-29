@@ -70,7 +70,7 @@
 
              <li class="dropdown">
                 <a href="javascript:void(0)">
-                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="ic:outline-category" class="menu-icon"></iconify-icon>
                     <span>Category Management</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -86,7 +86,7 @@
             </li>
              <li class="dropdown">
                 <a href="javascript:void(0)">
-                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mdi:medicine" class="menu-icon"></iconify-icon>
                     <span>Medicine Management</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -103,32 +103,33 @@
 
              <li class="dropdown">
                 <a href="javascript:void(0)">
-                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="streamline-freehand-color:business-product-supplier-2" class="menu-icon"></iconify-icon>
                     <span>Supplier Management</span>
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Supplier List</a>
+                        <a href="view_suppliers.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Supplier List</a>
                     </li>
                     <li>
-                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Supplier</a>
+                        <a href="create_supplier.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Supplier</a>
                     </li>
-                    
-                   
                 </ul>
             </li>
 
              <li class="dropdown">
                 <a href="javascript:void(0)">
-                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="carbon:purchase" class="menu-icon"></iconify-icon>
                     <span>Purchase Management</span>
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Purchase List</a>
+                        <a href="view_purchases.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Purchase List</a>
                     </li>
                     <li>
-                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Purchase</a>
+                        <a href="create_purchase.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Purchase</a>
+                    </li>
+                    <li>
+                        <a href="create_purchase_item.php"><i class="ri-circle-fill circle-icon text-primary-300 w-auto"></i> Add Purchase Items</a>
                     </li>
                     
                    
@@ -143,28 +144,17 @@
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Order List</a>
+                        <a href="view_order_items.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Order List</a>
                     </li>
                     <li>
-                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Order</a>
+                        <a href="create_order.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Create Order</a>
+                    </li>
+                    <li>
+                        <a href="view_orders.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> View Order</a>
                     </li>
                     
                    
                 </ul>
-            </li>
-
-
-
-
-
-
-
-
-            <li>
-                <a href="email.php">
-                    <iconify-icon icon="material-symbols-light:order-approve-rounded" class="menu-icon"></iconify-icon>
-                    <span>Orders Mananagement</span>
-                </a>
             </li>
             <li>
                 <a href="chat-message.php">
