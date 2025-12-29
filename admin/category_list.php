@@ -1,48 +1,48 @@
-<?php include_once("inc/db_connect.php");  ?>
-
-<!DOCTYPE html>
 
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        table,th,td{
-            border: 1px solid black;
-            border-collapse: collapse;
-            
-        }
-    </style>
-</head>
-<?php 
-$sql="SELECT * FROM categories order by category_id desc";
-$result=$db->query($sql);  
-//$row=$result->fetch_array(); 
+<?php
 
+include 'inc/db_connect.php'; 
 
 
 ?>
-<body>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-        
-        </tr>
-        <?php while($row1=$result->fetch_object()): ?>
-        <tr>
-            <td><?php  echo $row1->category_id; ?></td>
-            <td><?php  echo $row1->name; ?></td>
-            <td><?php   echo $row1->description	; ?></td>
-      
+<div class="card shadow">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Category List</h5>
+    </div>
 
-        </tr>
-        <?php endwhile; ?>
-    </table> <br>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="table-secondary">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th width="120">Action</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <a href="add_category.php"> Add category </a>
-</body>
-</html>
+            <?php
+            $i=1;
+            $result = $conn->query("SELECT * FROM categories ORDER BY category_id DESC");
+            while($row = $result->fetch_assoc()){
+            ?>
+                <tr>
+                    <td><?= $i++ ?></td>
+                    <td><?= htmlspecialchars($row['name']) ?></td>
+                    <td><?= htmlspecialchars($row['description']) ?></td>
+                    <td>
+                        <a href="delete_category.php?id=<?= $row['category_id'] ?>"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this category?')">
+                           Delete
+                        </a>
+                    </td>
+                </tr>
+            <?php } ?>
+
+            </tbody>
+        </table>
+    </div>
+</div>

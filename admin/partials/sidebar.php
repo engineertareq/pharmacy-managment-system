@@ -91,10 +91,10 @@
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="#"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Medicine List</a>
+                        <a href="medicine_list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Medicine List</a>
                     </li>
                     <li>
-                        <a href="#"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Medicine</a>
+                        <a href="add_medicine.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Medicine</a>
                     </li>
                     
                    
