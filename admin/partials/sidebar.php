@@ -18,34 +18,7 @@
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="index.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> AI</a>
-                    </li>
-                    <li>
-                        <a href="index-2.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> CRM</a>
-                    </li>
-                    <li>
-                        <a href="index-3.php"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> eCommerce</a>
-                    </li>
-                    <li>
-                        <a href="index-4.php"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Cryptocurrency</a>
-                    </li>
-                    <li>
-                        <a href="index-5.php"><i class="ri-circle-fill circle-icon text-success-main w-auto"></i> Investment</a>
-                    </li>
-                    <li>
-                        <a href="index-6.php"><i class="ri-circle-fill circle-icon text-purple w-auto"></i> LMS</a>
-                    </li>
-                    <li>
-                        <a href="index-7.php"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> NFT & Gaming</a>
-                    </li>
-                    <li>
-                        <a href="index-8.php"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Medical</a>
-                    </li>
-                    <li>
-                        <a href="index-9.php"><i class="ri-circle-fill circle-icon text-purple w-auto"></i> Analytics</a>
-                    </li>
-                    <li>
-                        <a href="index-10.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> POS & Inventory </a>
+                        <a href="index.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> POS & Inventory </a>
                     </li>
                 </ul>
             </li>
@@ -181,16 +154,7 @@
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="invoice-list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> List</a>
-                    </li>
-                    <li>
-                        <a href="invoice-preview.php"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Preview</a>
-                    </li>
-                    <li>
-                        <a href="invoice-add.php"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add new</a>
-                    </li>
-                    <li>
-                        <a href="invoice-edit.php"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> Edit</a>
+                        <a href="invoice_list.php"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>Invoice List</a>
                     </li>
                 </ul>
             </li>

@@ -7,7 +7,7 @@ $clients_res = $conn->query("SELECT user_id, full_name FROM users WHERE role = '
 $staff_res = $conn->query("SELECT user_id, full_name FROM users WHERE role IN ('staff', 'admin')");
 
 $medicines_array = [];
-$medicines_res = $conn->query("SELECT medicine_id, name, sell_price, stock_quantity FROM medicines"); // Added stock_quantity
+$medicines_res = $conn->query("SELECT medicine_id, name, sell_price, stock_quantity FROM medicines");
 if ($medicines_res) {
     while($row = $medicines_res->fetch_assoc()) {
         $medicines_array[] = $row;
@@ -20,7 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $invoice_number = $_POST['invoice_number'];
     $client_id = $_POST['client_id'];
     $staff_id = $_POST['staff_id'];
-    $discount = $_POST['discount'];
+    
+    $discount = floatval($_POST['discount']); 
+
     $payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
     $order_date = $_POST['order_date'];
@@ -34,8 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $calculated_sub_total = 0;
         for ($i = 0; $i < count($med_ids); $i++) {
-            $calculated_sub_total += ($quantities[$i] * $prices[$i]);
+            $qty = floatval($quantities[$i]);
+            $price = floatval($prices[$i]);
+            $calculated_sub_total += ($qty * $price);
         }
+        
         $calculated_grand_total = $calculated_sub_total - $discount;
 
         $sql_order = "INSERT INTO orders (invoice_number, client_id, staff_id, sub_total, discount, grand_total, payment_status, payment_method, order_date) 
@@ -53,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         for ($i = 0; $i < count($med_ids); $i++) {
             $m_id = $med_ids[$i];
-            $qty = $quantities[$i];
-            $price = $prices[$i];
+            $qty = floatval($quantities[$i]);
+            $price = floatval($prices[$i]);
             $total = $qty * $price;
 
             if(!empty($m_id) && $qty > 0) {
@@ -81,7 +86,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $conn->commit();
-        $message = "<div class='alert alert-success'>Order saved & Stock updated successfully! Invoice: <strong>$invoice_number</strong></div>";
+        
+        // Success Message with PDF Link
+        $message = "<div class='alert alert-success d-flex justify-content-between align-items-center'>
+                        <span>Order created successfully! Invoice: <strong>$invoice_number</strong></span>
+                        <a href='generate_invoice_pdf.php?id=$new_order_id' target='_blank' class='btn btn-sm btn-dark'>
+                            <iconify-icon icon='solar:file-download-bold'></iconify-icon> Download PDF
+                        </a>
+                    </div>";
+        
         $auto_invoice = 'INV-' . date('Ymd') . '-' . rand(100, 999); 
 
     } catch (Exception $e) {
@@ -150,8 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -214,7 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function addItemRow() {
         const table = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
         const row = table.insertRow();
-        
         let options = '<option value="">Select Medicine</option>';
         medicines.forEach(med => {
             options += `<option value="${med.medicine_id}" data-price="${med.sell_price}" data-stock="${med.stock_quantity}">${med.name} (Stock: ${med.stock_quantity})</option>`;
@@ -227,32 +238,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
                 <small class="text-muted stock-info"></small>
             </td>
-            <td>
-                <input type="number" step="0.01" name="price_per_unit[]" class="form-control price-input" readonly>
-            </td>
-            <td>
-                <input type="number" name="quantity[]" class="form-control qty-input" placeholder="1" oninput="updateRowTotal(this)" required>
-            </td>
-            <td>
-                <input type="number" step="0.01" class="form-control total-input" readonly value="0.00">
-            </td>
-            <td class="text-center">
-                <button type="button" class="btn btn-sm btn-danger-600" onclick="removeRow(this)">X</button>
-            </td>
+            <td><input type="number" step="0.01" name="price_per_unit[]" class="form-control price-input" readonly></td>
+            <td><input type="number" name="quantity[]" class="form-control qty-input" placeholder="1" oninput="updateRowTotal(this)" required></td>
+            <td><input type="number" step="0.01" class="form-control total-input" readonly value="0.00"></td>
+            <td class="text-center"><button type="button" class="btn btn-sm btn-danger-600" onclick="removeRow(this)">X</button></td>
         `;
     }
 
     function updateRowPrice(selectElement) {
         const price = selectElement.options[selectElement.selectedIndex].getAttribute('data-price');
         const stock = selectElement.options[selectElement.selectedIndex].getAttribute('data-stock');
-        
         const row = selectElement.closest('tr');
         row.querySelector('.price-input').value = price || 0;
         if(stock) {
             row.querySelector('.qty-input').setAttribute('max', stock);
             row.querySelector('.stock-info').innerText = `Max: ${stock}`;
         }
-        
         updateRowTotal(selectElement);
     }
 
@@ -285,9 +286,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         document.querySelectorAll('.total-input').forEach(input => {
             subTotal += parseFloat(input.value) || 0;
         });
-
         document.getElementById('sub_total').value = subTotal.toFixed(2);
-        const discount = parseFloat(document.getElementById('discount').value) || 0;
+        
+       
+        const discountInput = document.getElementById('discount').value;
+        const discount = discountInput === "" ? 0 : parseFloat(discountInput);
+        
         const grandTotal = subTotal - discount;
         document.getElementById('grand_total').value = grandTotal.toFixed(2);
     }
