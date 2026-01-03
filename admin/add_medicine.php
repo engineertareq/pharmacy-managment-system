@@ -1,40 +1,69 @@
 <?php 
 include './partials/layouts/layoutTop.php'; 
 include 'inc/db_connect.php'; 
+
+// Fetch categories and suppliers for the dropdowns
 $categories = $conn->query("SELECT category_id, name FROM categories");
 $suppliers = $conn->query("SELECT supplier_id, company_name FROM suppliers");
 
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $generic_name = $_POST['generic_name'];
-    $sku = $_POST['sku'];
-    $category_id = $_POST['category_id'];
-    $supplier_id = $_POST['supplier_id'];
-    $buy_price = $_POST['buy_price'];
-    $sell_price = $_POST['sell_price'];
-    $stock_quantity = $_POST['stock_quantity'];
-    $batch_number = $_POST['batch_number'];
+    // 1. Sanitize Inputs
+    $name = htmlspecialchars($_POST['name']);
+    $generic_name = htmlspecialchars($_POST['generic_name']);
+    $sku = htmlspecialchars($_POST['sku']);
+    $category_id = intval($_POST['category_id']);
+    $supplier_id = intval($_POST['supplier_id']);
+    $buy_price = floatval($_POST['buy_price']);
+    $sell_price = floatval($_POST['sell_price']);
+    $stock_quantity = intval($_POST['stock_quantity']);
+    $batch_number = htmlspecialchars($_POST['batch_number']);
     $expiry_date = $_POST['expiry_date'];
     $status = $_POST['status'];
 
-    $image_url = "";
+    // 2. Handle Image Upload
+    $image_url = ""; // Default empty if no image
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "uploads/";
-        if (!is_dir($target_dir)) { mkdir($target_dir, 0777, true); } 
-        $target_file = $target_dir . time() . "_" . basename($_FILES["image"]["name"]);
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-        $image_url = $target_file;
+        
+        // Create folder if it doesn't exist
+        if (!is_dir($target_dir)) { 
+            mkdir($target_dir, 0777, true); 
+        } 
+
+        // Get file extension
+        $file_extension = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
+        $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+        // Check if it's a valid image type
+        if (in_array($file_extension, $allowed_types)) {
+            // Generate a unique name to prevent overwriting
+            $new_filename = uniqid() . "_" . basename($_FILES["image"]["name"]);
+            $target_file = $target_dir . $new_filename;
+
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                $image_url = $target_file; // Store path in DB
+            } else {
+                $message = "<div class='alert alert-danger'>Failed to upload image.</div>";
+            }
+        } else {
+            $message = "<div class='alert alert-danger'>Invalid file format. Only JPG, JPEG, PNG, GIF allowed.</div>";
+        }
     }
 
-    $sql = "INSERT INTO medicines (name, generic_name, sku, category_id, supplier_id, buy_price, sell_price, stock_quantity, batch_number, expiry_date, image_url, status) 
-            VALUES ('$name', '$generic_name', '$sku', '$category_id', '$supplier_id', '$buy_price', '$sell_price', '$stock_quantity', '$batch_number', '$expiry_date', '$image_url', '$status')";
+    // 3. Insert using Prepared Statements (Prevents SQL Injection)
+    if (empty($message)) { // Only proceed if no upload errors
+        $stmt = $conn->prepare("INSERT INTO medicines (name, generic_name, sku, category_id, supplier_id, buy_price, sell_price, stock_quantity, batch_number, expiry_date, image_url, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        $stmt->bind_param("sssiiddissss", $name, $generic_name, $sku, $category_id, $supplier_id, $buy_price, $sell_price, $stock_quantity, $batch_number, $expiry_date, $image_url, $status);
 
-    if ($conn->query($sql) === TRUE) {
-        $message = "<div class='alert alert-success'>Medicine added successfully!</div>";
-    } else {
-        $message = "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";
+        if ($stmt->execute()) {
+            $message = "<div class='alert alert-success'>Medicine added successfully!</div>";
+        } else {
+            $message = "<div class='alert alert-danger'>Database Error: " . $stmt->error . "</div>";
+        }
+        $stmt->close();
     }
 }
 ?>
@@ -129,8 +158,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col-md-4">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-select">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
 
