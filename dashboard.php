@@ -8,17 +8,18 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Fetch User Data
 $user_sql = "SELECT * FROM users WHERE user_id = '$user_id'";
 $user_res = $conn->query($user_sql);
 
 if ($user_res->num_rows > 0) {
     $user_data = $user_res->fetch_assoc();
 } else {
-
     echo "<script>window.location.href='logout.php';</script>";
     exit();
 }
 
+// Fetch Orders
 $order_sql = "SELECT * FROM orders WHERE client_id = '$user_id' ORDER BY order_id DESC";
 $orders = $conn->query($order_sql);
 ?>
@@ -80,7 +81,11 @@ $orders = $conn->query($order_sql);
                                             ?>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <a href="admin/generate_invoice_pdf.php?id=<?php echo $order['order_id']; ?>" 
+                                               class="btn btn-sm btn-outline-primary" 
+                                               target="_blank">
+                                                View
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php endwhile; ?>
