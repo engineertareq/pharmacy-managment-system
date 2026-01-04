@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="col-12 mt-4">
                         <button type="submit" class="btn btn-primary-600">Save Medicine</button>
-                        <a href="view_medicines.php" class="btn btn-secondary-600">View List</a>
+                        <a href="medicine_list.php" class="btn btn-secondary-600">View List</a>
                     </div>
                 </div>
             </form>

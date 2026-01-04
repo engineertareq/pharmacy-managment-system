@@ -64,6 +64,7 @@ if (isset($_SESSION['cart'])) {
                         </ul>
                     </li>
                 <?php else: ?>
+                     <li class="nav-item"><a class="nav-link btn btn-danger text-white ms-2 px-3" href="admin/">Dashbord</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2 px-3" href="register.php">Register</a></li>
                 <?php endif; ?>

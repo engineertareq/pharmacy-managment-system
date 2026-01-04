@@ -15,11 +15,11 @@ if (isset($_POST['add_to_cart'])) {
 }
 ?>
 
-<div class="p-5 mb-4 bg-light rounded-3 text-center" style="background: #e9ecef;">
+<div class="p-5 mb-4 bg-light rounded-3 text-center" style="background: #c5d5e4ff;">
     <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold text-success">Welcome to PharmaCare</h1>
-        <p class="col-md-8 fs-4 mx-auto">Your trusted online pharmacy for genuine medicines and healthcare products.</p>
-        <a class="btn btn-primary btn-lg" href="shop.php">Browse Shop</a>
+        <h1 class="display-5 fw-bold text-success">Welcome to PharmaCare </h1>
+        <!-- <p class="col-md-8 fs-4 mx-auto">Your trusted online pharmacy for genuine medicines and healthcare products.</p>
+        <a class="btn btn-primary btn-lg" href="shop.php">Browse Shop</a> -->
     </div>
 </div>
 
