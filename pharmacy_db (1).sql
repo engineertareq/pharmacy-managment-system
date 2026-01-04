@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2025 at 07:23 PM
+-- Generation Time: Jan 04, 2026 at 06:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,14 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `description`) VALUES
-(1, 'Antibiotics', NULL),
-(2, 'Painkillers', NULL);
+(4, 'Pain/ Fever', 'Pain relief & fever reducer'),
+(5, 'Acid reflux/ Ulcer', 'Reduces stomach acid for heartburn/ulcers.'),
+(6, 'Antibiotic', 'Broad-spectrum antibiotic for infections'),
+(7, 'Antihistamine', 'Allergy symptoms relief (runny nose, itching).'),
+(8, 'Cholesterol', 'Lowers cholesterol to protect heart.'),
+(9, 'Anti-parasitic', 'Treats worm/parasite infections.'),
+(10, 'Diabetes', 'Oral tablet for type 2 diabetes.'),
+(11, 'Blood pressure', 'Helps lower high blood pressure.');
 
 -- --------------------------------------------------------
 
@@ -68,7 +74,14 @@ CREATE TABLE `medicines` (
 --
 
 INSERT INTO `medicines` (`medicine_id`, `name`, `generic_name`, `sku`, `category_id`, `supplier_id`, `buy_price`, `sell_price`, `stock_quantity`, `batch_number`, `expiry_date`, `image_url`, `status`) VALUES
-(1, 'Napa Extra', NULL, 'NAPA01', 2, 1, 1.50, 2.50, 361, NULL, '2026-12-31', NULL, 'active');
+(1, 'Napa Extra', NULL, 'NAPA01', NULL, 1, 1.50, 2.50, 361, NULL, '2026-12-31', NULL, 'active'),
+(3, 'Napa 500', 'Paracetamol 500mg', '', 4, 1, 2.00, 3.00, 16, '1', '2027-01-04', 'uploads/6959ded9e71a5_napa-500-mg-tablet-95324450053-i1-jtmMTho0xPmKADM1kMTq.jpg', 'active'),
+(9, 'Omeprazole 20mg', 'Omeprazole', '002', 5, 1, 5.00, 7.00, 20, '02', '2027-02-04', 'uploads/6959e083d8657_download (2).jpg', 'active'),
+(10, 'Amoxicillin 500mg', 'Amoxicillin', '003', 6, 1, 10.00, 15.00, 20, '5', '2028-02-04', 'uploads/6959e0ebcd8d5_download (3).jpg', 'active'),
+(11, 'Fexofenadine 120mg', 'Fexofenadine', '004', 7, 1, 0.00, 0.00, 0, '6', '2027-07-04', 'uploads/6959e14c52ba7_download (4).jpg', 'active'),
+(12, 'Amlodipine 5mg', 'Amlodipine', '005', 11, 1, 7.00, 10.00, 30, '8', '2028-02-04', 'uploads/6959e1dd8117e_download (5).jpg', 'active'),
+(13, 'Atorvastatin 20mg', 'Atorvastatin', '006', 8, 2, 10.00, 15.00, 30, '9', '2027-07-04', 'uploads/6959e2361f807_download (6).jpg', 'active'),
+(14, 'Informet/ Glucomet 500mg', 'Informet/ Glucomet', '007', 10, 1, 10.00, 12.00, 25, '10', '2028-10-04', 'uploads/6959e2a76e4db_download (7).jpg', 'active');
 
 -- --------------------------------------------------------
 
@@ -99,7 +112,16 @@ INSERT INTO `orders` (`order_id`, `invoice_number`, `client_id`, `staff_id`, `su
 (3, 'INV-20251229-911', 11, 5, 5745.00, 42.00, 5703.00, '', 'cash', '1987-07-23 18:00:00'),
 (4, 'INV-20251229-343', 3, 1, 402.50, 79.00, 323.50, '', '', '2025-10-19 18:00:00'),
 (5, 'INV-20251229-355', 11, 5, 827.50, 83.00, 744.50, 'paid', 'cash', '1991-02-24 18:00:00'),
-(7, 'INV-20251229-659', 3, 5, 730.00, 87.00, 643.00, 'paid', 'card', '1977-09-20 18:00:00');
+(7, 'INV-20251229-659', 3, 5, 730.00, 87.00, 643.00, 'paid', 'card', '1977-09-20 18:00:00'),
+(8, 'INV-1767498833', 13, NULL, 30.00, 0.00, 30.00, '', 'cash', '2026-01-04 03:53:53'),
+(9, 'INV-1767498950', 14, NULL, 25.00, 0.00, 25.00, 'paid', 'card', '2026-01-04 03:55:50'),
+(10, 'INV-1767499138', 15, NULL, 25.00, 0.00, 25.00, 'paid', 'card', '2026-01-04 03:58:58'),
+(11, 'INV-1767501224', 13, NULL, 28.00, 0.00, 28.00, 'paid', 'card', '2026-01-04 04:33:44'),
+(12, 'INV-1767501547', NULL, NULL, 25.00, 0.00, 25.00, '', 'card', '2026-01-04 04:39:07'),
+(13, 'INV-1767503866', 13, NULL, 10.00, 0.00, 10.00, 'paid', 'card', '2026-01-04 05:17:46'),
+(14, 'INV-1767504120', 13, NULL, 22.00, 0.00, 22.00, '', 'cash', '2026-01-04 05:22:00'),
+(15, 'INV-1767504312', 17, NULL, 25.00, 0.00, 25.00, 'paid', 'mobile_banking', '2026-01-04 05:25:12'),
+(16, 'INV-1767504995', 13, NULL, 25.00, 0.00, 25.00, 'paid', 'card', '2026-01-04 05:36:35');
 
 -- --------------------------------------------------------
 
@@ -133,7 +155,32 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `medicine_id`, `quantity`, `pr
 (10, 4, 1, 141, 2.50, 352.50),
 (11, 4, 1, 20, 2.50, 50.00),
 (12, 5, 1, 331, 2.50, 827.50),
-(13, 7, 1, 292, 2.50, 730.00);
+(13, 7, 1, 292, 2.50, 730.00),
+(14, 8, 3, 3, 3.00, 9.00),
+(15, 8, 9, 3, 7.00, 21.00),
+(16, 9, 3, 1, 3.00, 3.00),
+(17, 9, 9, 1, 7.00, 7.00),
+(18, 9, 10, 1, 15.00, 15.00),
+(19, 10, 3, 1, 3.00, 3.00),
+(20, 10, 9, 1, 7.00, 7.00),
+(21, 10, 10, 1, 15.00, 15.00),
+(22, 11, 3, 2, 3.00, 6.00),
+(23, 11, 9, 1, 7.00, 7.00),
+(24, 11, 10, 1, 15.00, 15.00),
+(25, 11, 11, 1, 0.00, 0.00),
+(26, 12, 3, 1, 3.00, 3.00),
+(27, 12, 9, 1, 7.00, 7.00),
+(28, 12, 10, 1, 15.00, 15.00),
+(29, 13, 3, 1, 3.00, 3.00),
+(30, 13, 9, 1, 7.00, 7.00),
+(31, 14, 9, 1, 7.00, 7.00),
+(32, 14, 10, 1, 15.00, 15.00),
+(33, 15, 3, 1, 3.00, 3.00),
+(34, 15, 9, 1, 7.00, 7.00),
+(35, 15, 10, 1, 15.00, 15.00),
+(36, 16, 3, 1, 3.00, 3.00),
+(37, 16, 9, 1, 7.00, 7.00),
+(38, 16, 10, 1, 15.00, 15.00);
 
 -- --------------------------------------------------------
 
@@ -249,7 +296,13 @@ INSERT INTO `users` (`user_id`, `full_name`, `email`, `password_hash`, `phone`, 
 (2, 'Rahim Staff', 'staff@pharma.com', '123456', NULL, NULL, 'staff', '2025-12-28 15:46:05', 'assets/images/user-grid/user-grid-img14.png'),
 (3, 'Karim Client', 'client@pharma.com', '123456', NULL, NULL, 'client', '2025-12-28 15:46:05', 'assets/images/user-grid/user-grid-img14.png'),
 (5, 'Herrod Galloway', 'lutu@mailinator.com', '$2y$10$wwBWv8VkO3HK9yTsB6zMqu0vcw/95XcLkjzPbAc3A8EpsBMb5HSci', '+1 (861) 403-9661', 'Omnis duis consequat', 'admin', '2025-12-28 17:14:53', 'assets/images/user-grid/user-grid-img14.png'),
-(11, 'Tanjimul Islam Tareq', 'engineertareqbd@gmail.com', '$2y$10$OtiA1B7oL4JQYKJ7uXuykeM9aQ8fUJ4ubukkwBw/UDXGK9Oj3rHqW', '01568993772', '93, Bernaiya, Shahrasti, Chandpur', 'client', '2025-12-28 17:28:22', 'assets/images/users/695168b62ffe9.png');
+(11, 'Tanjimul Islam Tareq', 'engineertareqbd@gmail.com', '$2y$10$OtiA1B7oL4JQYKJ7uXuykeM9aQ8fUJ4ubukkwBw/UDXGK9Oj3rHqW', '01568993772', '93, Bernaiya, Shahrasti, Chandpur', 'client', '2025-12-28 17:28:22', 'assets/images/users/695168b62ffe9.png'),
+(12, 'Hridoy', 'hr@gmail.com', '$2y$10$z8d3oFCFQcURxd6un25GtOIzNQ7yGYRjglCTBL22QpUGAxMh72S1C', '01888996656', 'dsfr', 'client', '2026-01-04 03:49:59', 'assets/images/user-grid/user-grid-img14.png'),
+(13, 'Roni', 'roni@gmail.com', '$2y$10$p8mJv4sqGLneSq4tjzOwqO2d.tz4Puu0LCBVTScOXA/sgVijBzsF6', '01788996623', 'Dhaka', 'client', '2026-01-04 03:52:45', 'assets/images/user-grid/user-grid-img14.png'),
+(14, 'Tania', 'tania@gmail.com', '$2y$10$QZ/XacHbsia.2ZIhaHmCt.wx/gi1odig/KEWOjkmjJC.FiHxJBuRm', '01788996623', 'Shirajgong', 'client', '2026-01-04 03:55:01', 'assets/images/user-grid/user-grid-img14.png'),
+(15, 'Hridoy1', 'hrio@gmail.com', '$2y$10$M2LzbbN.SXVJXPk5kCLt8Ohn.KAgUGCOPU2WdPLSxXp6RxQY3ou3K', '1931884505', 'sdfgf', 'client', '2026-01-04 03:58:32', 'assets/images/user-grid/user-grid-img14.png'),
+(16, 'Tabassum', 'ta@gmail.com', '$2y$10$oLdVgBZSoGLwcNGfvK8GaeDeqxm4I.e.UO0SoWxcMicj/Xw6ek2C.', '01888996656', 'serwer', 'client', '2026-01-04 05:23:33', 'assets/images/user-grid/user-grid-img14.png'),
+(17, 'Rahim', 'ra@gmail.com', '$2y$10$Gngj8ZCBe3iBh/VyXGWFCeErjZC6k85jOPwpHnaOjEI1Ydl4zbc.C', '01888996656', 'ertwet', 'client', '2026-01-04 05:24:33', 'assets/images/user-grid/user-grid-img14.png');
 
 --
 -- Indexes for dumped tables
@@ -331,25 +384,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `medicine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `medicine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `prescriptions`
@@ -379,7 +432,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
